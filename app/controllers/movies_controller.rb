@@ -22,7 +22,7 @@ class MoviesController < ApplicationController
     elsif session.keys.include? "ratings"
       @ratings = session[:ratings]
     else
-      @ratings = @all_ratings
+      @ratings=@all_ratings
     end
     session[:ratings] = @ratings
     redirect_to movies_path(:sort => session[:sort], :ratings => session[:ratings]) if !((params.keys.include? 'sort') || (params.keys.include? 'ratings'))
