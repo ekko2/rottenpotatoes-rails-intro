@@ -14,7 +14,10 @@ class MoviesController < ApplicationController
     sort_by = params[:sort_by]
     @table_header = 'hilite' if sort_by == 'title'
     @release_date_header = 'hilite' if sort_by == 'release_date'
-    @movies = Movie.order(sort_by)
+    @all_ratings = Movie.ratings
+    @ratings = @all_ratings
+    @ratings = params[:ratings].keys if params.keys.include? "ratings"
+    @movies = Movie.where(:rating => @ratings).order(sort_by)
   end
 
   def new
